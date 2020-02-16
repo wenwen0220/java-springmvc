@@ -1,0 +1,14 @@
+1.声明一些自定义的注解
+2.写一个demo的controller与service
+3.自定义处理器，DispathcherServlet，有三个主要的方法
+	1)init
+		a.scanPackage扫描基本包下的所有类
+		b.inistance对扫描出来的类实例化
+		c.ioc依赖注入，就是放到一个map容器里
+		d.handlerMapping建立一个path与method的映射关系
+	2)doGet
+	3)doPost,当有请求访问时这里是入口,对请求进行拦截，并根据请求路径找到对应点的要执行的方法
+		a.拿到请求的url，根据url得到一些实例、方法
+		b.handlerMapping.hand用策略模式拿到注解的args
+		c.method.invoke(instance,args)利用反射执行相应的方法
+4.web.xml里配置上自定义的DispathcherServlet，项目启动时回家再init方法
